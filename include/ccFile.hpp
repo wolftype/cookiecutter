@@ -29,12 +29,11 @@
 
 namespace cc {
 
-    /// Bare bones file loader: call with File::Load(path/to/filename)
+    /// Bare bones file loader
     struct File {
 
       /// Pass in filepath relative to project source directory (e.g. "files/Rectangle.json")
       static void Load(std::string filepath, std::fstream& myfile){
-      //  std::fstream myfile;
 
         // Search for file by going up file directory tree up to 5 times
         int attempts = 0;
