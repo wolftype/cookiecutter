@@ -190,5 +190,6 @@ We can use some of the algorithms to solve more complicated problems.
 ### Code Design
 
 1. Template the topological data on underyling data to enable testing with other CGAL libraries
+2. Code for now is inlined, but as project grows will need to separate out src files
 2. Add in Visualization of algorithms and data for better debugging
 3. We might hope that we could encode the arc segments as circles and treat this problem as a minimal bounding box of n-spheres (see for instance [this article](http://www.sciencedirect.com/science/article/pii/0925772195000240)), however that does not precisely simplify the problem, since only _segments_ of circles need to be hulled.  Still, the extent to which the use of such a representation this would speed up calculations or increase precision could be examined with more time.
