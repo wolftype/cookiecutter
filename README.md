@@ -118,18 +118,30 @@ A general solution to the second problem is slightly more involved, as it entail
 
 #### 3. Geo Task 1: Integrate the (curvature-weighted) length of a specified path composed of straight lines and arc segments
 * For Circular Arcs with vertices `ea` and `eb` and `center` vector, find radius.
-      double radius = (ea-center).norm();
+```cpp
+double radius = (ea-center).norm();
+```
 * Find vectors `va` and `vb` pointing to vertices from center of circle:
-      Vector va = (ea-center);
-      Vector vb = (eb-center);
+```cpp
+Vector va = (ea-center);
+Vector vb = (eb-center);
+```
 * Use atan2 function on cross and dot product of vectors to find theta between them:
-      double theta = atan2( Vector::Cross(va,vb), Vector::Dot(va,vb));
+```cpp
+double theta = atan2( Vector::Cross(va,vb), Vector::Dot(va,vb));
+```
 * Scale theta [-PI,PI] to range [0-2PI]:
-      theta = (theta >= 0) ? theta : PI + (PI-theta);
+```cpp
+theta = (theta >= 0) ? theta : PI + (PI-theta);
+```
 * `theta` now represents counterclockwise radians from `ea` to `eb` -- determine final theta based on input data, in range of [-2PI,2PI]
-      theta =bClockwise ? -(2*PI - theta) : theta;
+```cpp
+theta =bClockwise ? -(2*PI - theta) : theta;
+```
 * Calculate Arc length
-      double arclength = theta*radius;
+```cpp
+double arclength = theta*radius;
+```
 * Weigh `length` by radius and sum with edge lengths
 
 #### 4. Geo Task 2: Find the Area of the Minimum Bounding Box of a Set of Points
