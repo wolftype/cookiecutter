@@ -27,6 +27,7 @@
 #include <vector>
 #include <math.h>
 #include <memory>
+#include <algorithm>
 
 namespace cc{
 

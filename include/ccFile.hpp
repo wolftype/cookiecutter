@@ -25,6 +25,7 @@
 #define CC_FILE_HEADER_INCLUDED
 
 #include <fstream>
+#include <stdexcept>
 
 namespace cc {
 
@@ -32,8 +33,8 @@ namespace cc {
     struct File {
 
       /// Pass in filepath relative to project source directory (e.g. "files/Rectangle.json")
-      static std::fstream Load(std::string filepath){
-        std::fstream myfile;
+      static void Load(std::string filepath, std::fstream& myfile){
+      //  std::fstream myfile;
 
         // Search for file by going up file directory tree up to 5 times
         int attempts = 0;
@@ -45,7 +46,6 @@ namespace cc {
         }
         if (!myfile.is_open()) throw std::invalid_argument("Error: File Not Found.");
 
-        return myfile;
       }
 
     };

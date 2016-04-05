@@ -136,7 +136,9 @@ namespace cc{
         printf("Loading Data from %s...\n", filename.c_str());
         ///1. Load file into root
         Json::Value root;
-        File::Load(filename) >> root;
+	std::fstream file;
+        File::Load(filename, file);
+	file >> root;
 
         ///2. Store Vertex information first
         auto vertices = root["Vertices"];
