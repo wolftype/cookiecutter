@@ -7,7 +7,7 @@ to estimate the cost of manufacturing of some simple shapes based on time it wil
 ### A Quote for the Cookie Cutter
 In a terminal, typing:
 ```
-git clone git@github.com/wolftype/cookiecutter.git
+git clone https://github.com/wolftype/cookiecutter.git
 cd cookiecutter
 ./run.sh
 ```
