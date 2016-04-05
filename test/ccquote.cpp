@@ -21,24 +21,23 @@ int main(int argc, char * argv[]) {
 
   Data data;
   double cost;
-  int resolution = 20;
-
+  data.resolution( 20 );
   /// process argument if one exists, otherwise process 3 default files
   if (argc > 1) {
     data.load(argv[1]);
-    cost = data.cost(resolution);
+    cost = data.cost();
     print(cost);
   } else {
     data.load("files/Rectangle.json");
-    cost = data.cost(resolution);
+    cost = data.cost();
     print(cost);
 
     data.load("files/ExtrudeCircularArc.json");
-    cost = data.cost(resolution);
+    cost = data.cost();
     print(cost);
 
     data.load("files/CutCircularArc.json");
-    cost = data.cost(resolution);
+    cost = data.cost();
     print(cost);
 
   }

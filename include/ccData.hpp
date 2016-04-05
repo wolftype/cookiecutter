@@ -70,13 +70,18 @@ namespace cc{
       /// Circular Arcs
       vector<CircularArc> mCircularArc;
 
+      /// Number of discretization steps, default is 20
+      int mResolution = 20;
+
     public:
 
       ///Empty Constructor
-      Data(){}
+      Data() {}
 
-      ///Construct and load string
-      Data(std::string filename){ load(filename); }
+      ///Construct and load string and set resolution
+      Data(std::string filename, int res = 20)
+      : mResolution(res)
+      { load(filename); }
 
       /// Initialize containers, clearing all members
       void init();
@@ -84,15 +89,18 @@ namespace cc{
       /// Load json file following format of files/Schema.json
       void load(std::string filename);
 
+      /// Set resolution
+      void resolution( int r ) { mResolution = r; }
+
       /// Discetize Circular Arc data
       /// \param res number of steps
       /// \returns point cloud std::vector
-      vector<Vec2> discretize(int res=100);
+      vector<Vec2> discretize();
 
       /// Area of Minimal Bounding Box
       /// \param res number of discretization steps
       /// \returns area in squared inches
-      double area(int res=100);
+      double area();
 
       /// Time in seconds it will take to machine
       /// \returns integrated time calculation
@@ -101,7 +109,7 @@ namespace cc{
       /// Estimated Cost to Manufacture
       /// \param res number of discretization steps
       /// \returns cost in dollars
-      double cost(int res = 100);
+      double cost();
 
       /// Print out stored data
       void print();
@@ -215,11 +223,11 @@ namespace cc{
     }
 
     //--------------------------------------------------------------------------
-    inline vector<Vec2> Data::discretize(int res){
+    inline vector<Vec2> Data::discretize(){
       vector< Vec2 > points = mVec;
       //Additional vertices from arc discretization
       for (auto& i : mCircularArc){
-        auto v = i.discretize(res);
+        auto v = i.discretize(mResolution);
         for (auto& j : v) points.push_back(j);
       }
       return points;
@@ -242,7 +250,7 @@ namespace cc{
     }
 
     //--------------------------------------------------------------------------
-    inline double Data::area(int res){
+    inline double Data::area(){
       //Point cloud with discretized curves
       vector< Vec2 > points = discretize();
       //Convex hull of point cloud
@@ -253,8 +261,8 @@ namespace cc{
     }
 
     //--------------------------------------------------------------------------
-    inline double Data::cost(int res){
-      return seconds() * Cost::PerSecond + area(res) * Cost::PerUnitArea;
+    inline double Data::cost(){
+      return seconds() * Cost::PerSecond + area() * Cost::PerUnitArea;
     }
 
 } //cc::
