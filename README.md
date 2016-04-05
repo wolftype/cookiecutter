@@ -140,7 +140,7 @@ theta =bClockwise ? -(2*PI - theta) : theta;
 ```
 * Calculate Arc length
 ```cpp
-double arclength = theta*radius;
+double arclength = fabs(theta)*radius;
 ```
 * Weigh `length` by radius and sum with edge lengths
 
